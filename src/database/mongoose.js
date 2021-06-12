@@ -1,7 +1,20 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const dotenv = require('dotenv')
 
-mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-});
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+      useUnifiedTopology: true,
+    });
+
+    console.log('MongoDB Connected')
+  } catch (err) {
+    console.error(err.message)
+    process.exit(1)
+  }
+};
+
+module.exports = connectDB;

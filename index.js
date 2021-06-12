@@ -6,12 +6,14 @@ const dotenv = require('dotenv');
 const customerRoute = require('./src/router/customerRoute');
 
 // database connection
-require('./src/database/mongoose');
+const connectDB = require('./src/database/mongoose');
 
 // intializing express
 const app = express();
 
 dotenv.config();
+
+connectDB();
 
 const PORT = process.env.PORT || 3000;
 

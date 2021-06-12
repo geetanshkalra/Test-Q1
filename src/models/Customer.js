@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
+const mongoose = require('mongoose')
+const validator = require('validator')
 
 const customerSchema = new mongoose.Schema(
   {
@@ -16,7 +16,7 @@ const customerSchema = new mongoose.Schema(
       lowercase: true,
       validate(value) {
         if (!validator.isEmail(value)) {
-          throw new Error('Email is invalid');
+          throw new Error('Email is invalid')
         }
       },
     },
@@ -32,15 +32,15 @@ const customerSchema = new mongoose.Schema(
 );
 
 customerSchema.statics.findByCredentials = async (email) => {
-  const customer = await User.findOne({ email });
+  const customer = await Customer.findOne({ email });
 
   if (customer) {
-    throw new Error('Customer with that email already exists');
+    throw new Error('Customer with that email already exists')
   }
 
-  return false;
-};
+  return false
+}
 
-const Customer = mongoose.model('customer', userSchema);
+const Customer = mongoose.model('customer', customerSchema)
 
-module.exports = Customer;
+module.exports = Customer
